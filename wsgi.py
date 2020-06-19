@@ -22,11 +22,9 @@ from schemas import products_schema, product_schema
 @app.route('/hello')
 def hello():
     return "Hello World!"
-##########################################################
-#TODO# J'ai rajouté un / à l'API mais fallait-il le faire?
-##########################################################
+
 @app.route('/products/', methods=['GET'])
-def products():
+def read_many_products():
     products = db.session.query(Product).all() # SQLAlchemy request => 'SELECT * FROM products'
     return products_schema.jsonify(products), 200
 
@@ -36,7 +34,6 @@ def read_one_product(id):
     if product is None:
         abort(404)
     return product_schema.jsonify(product), 200
-
 
 @app.route('/products/', methods=['POST'])
 def create_one_product():
@@ -69,6 +66,7 @@ def delete_one_product(id):
 @app.route('/products/<int:id>', methods=['PATCH'])
 def update_one_product(id):
     data = request.get_json()
+    # sample data input : { "name": "titi" }
     name = data.get('name')
     if data['name'] is None:
         abort(400)
@@ -87,3 +85,4 @@ def update_one_product(id):
 #sys.stderr.write("debut ====")
 #sys.stderr.write(data['name'])
 #sys.stderr.write("fin ====")
+#
