@@ -58,6 +58,15 @@ def create_one_product():
     db.session.commit()
     ##########################################################
     #TODO# Comment tester si le commit est OK ?
+    #    failed=False
+    #    try:
+    #       db_session.commit()
+    #    except Exception as e:
+    #       #log your exception in the way you want -> log to file, log as error with default logging, send by email. It's upon you
+    #       db_session.rollback()
+    #       db_session.flush() # for resetting non-commited .add()
+    #       failed=True
+    #some use of failed var, specific for your case if you need it
     # Est-il possible de récupérer le code retour du commit ?
     ##########################################################
     if product is None:
